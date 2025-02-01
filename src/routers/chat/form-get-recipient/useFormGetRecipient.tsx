@@ -18,7 +18,7 @@ const useFormGetRecipient = ({ setTelRecipient }: FormGetRecipientProps) => {
         formState: { errors },
     } = useForm<RecipientField>({
         defaultValues: {
-            [RecipientFieldName.telRecipient]: '79527370002',
+            [RecipientFieldName.telRecipient]: '',
         },
     })
     const [isReguest, setIsReguest] = useState<boolean>(false)
