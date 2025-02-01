@@ -1,12 +1,8 @@
 import { useForm } from 'react-hook-form'
 import getSettings from '../../api/green-api/get-settings'
-import { useState } from 'react'
-
-export enum AuthFieldName {
-    idInstance = 'idInstance',
-    token = 'apiTokenInstance',
-    tel = 'tel',
-}
+import { useContext, useState } from 'react'
+import { ContextAuth } from './layout-auth'
+import { AuthFieldName } from './type-auth'
 
 export interface AuthField {
     [AuthFieldName.idInstance]: string
@@ -22,13 +18,13 @@ const useAuth = () => {
         formState: { errors },
     } = useForm<AuthField>({
         defaultValues: {
-            [AuthFieldName.idInstance]: '',
-            [AuthFieldName.token]: '',
-            [AuthFieldName.tel]: '',
+            [AuthFieldName.idInstance]: '1103184203',
+            [AuthFieldName.token]: '98b71763112e4738b8c804e20107856c8f8a4536890847adbd',
+            [AuthFieldName.tel]: '79827315994',
         },
     })
     const [isReguest, setIsReguest] = useState<boolean>(false)
-
+    const { setSettings } = useContext(ContextAuth)
     const registers = {
         [AuthFieldName.idInstance]: () => {
             return register(AuthFieldName.idInstance, {
@@ -66,6 +62,7 @@ const useAuth = () => {
                 setIsReguest(false)
                 return
             }
+            setSettings(fieldsValue)
             setIsReguest(false)
         } catch {
             setError(AuthFieldName.idInstance, {

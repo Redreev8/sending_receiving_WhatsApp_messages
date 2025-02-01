@@ -2,8 +2,9 @@ import Error from '../../ui/error'
 import Fieldset from '../../ui/fieldset'
 import Input from '../../ui/input'
 import Label from '../../ui/label'
-import useFormAuth, { AuthFieldName } from './useFormAuth'
+import useFormAuth from './useFormAuth'
 import Btn from '../../ui/btn'
+import { AuthFieldName } from './type-auth'
 
 const FormAuth = () => {
     const { registers, isReguest, handleSubmit, errors } = useFormAuth()

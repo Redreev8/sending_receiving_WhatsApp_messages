@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import Caht from './chat'
+import Chat from './chat'
 import Auth from './auth'
 import LayoutAuth from './auth/layout-auth'
 
@@ -10,7 +10,7 @@ const Routers: FC = () => {
             <Routes>
                 <Route element={<LayoutAuth />}>
                     <Route path="/auth" element={<Auth />} />
-                    <Route path="/caht" element={<Caht />} />
+                    <Route path="/chat" element={<Chat />} />
                 </Route>
             </Routes>
         </BrowserRouter>
