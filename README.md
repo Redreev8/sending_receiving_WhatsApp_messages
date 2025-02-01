@@ -1,4 +1,20 @@
-# React + TypeScript + Vite
+## Команды для локальный запуска 
+
+```
+npm i
+npm run dev // запуск в дев режиме
+```
+
+## Список команд
+
+```
+npm run dev // запуск в дев режиме
+npm run build // собрать проект
+npm run lint -- --fix // проверить на наличие ошибок и преобразовать к стаил кайду
+npm run preview // запустить собраный проект
+```
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
