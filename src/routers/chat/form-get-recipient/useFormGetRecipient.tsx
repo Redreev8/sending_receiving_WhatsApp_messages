@@ -4,12 +4,13 @@ import { useContext, useState } from 'react'
 import checkWhatsapp from '../../../api/green-api/check-whatsapp'
 import { ContextAuth } from '../../auth/layout-auth'
 import { AuthFieldName } from '../../auth/type-auth'
+import { FormGetRecipientProps } from './form-get-recipient'
 
 export interface RecipientField {
     [RecipientFieldName.telRecipient]: string
 }
 
-const useFormGetRecipient = () => {
+const useFormGetRecipient = ({ setTelRecipient }: FormGetRecipientProps) => {
     const {
         register,
         handleSubmit,
@@ -49,7 +50,10 @@ const useFormGetRecipient = () => {
                 setError(RecipientFieldName.telRecipient, {
                     message: 'пользователь не найден',
                 })
+                setIsReguest(false)
+                return
             }
+            setTelRecipient(+fields[RecipientFieldName.telRecipient])
             setIsReguest(false)
         } catch {
             setIsReguest(false)

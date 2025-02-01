@@ -1,3 +1,4 @@
+import { Dispatch, FC, SetStateAction } from 'react'
 import BtnIcon from '../../../ui/btn-cion'
 import Error from '../../../ui/error'
 import ArrowMessange from '../../../ui/icon/arrow-messange'
@@ -6,8 +7,14 @@ import Label from '../../../ui/label'
 import { RecipientFieldName } from './context-get-recipient'
 import useFormGetRecipient from './useFormGetRecipient'
 
-const FormGetRecipient = () => {
-    const { isReguest, errors, handleSubmit, registers } = useFormGetRecipient()
+export interface FormGetRecipientProps {
+    setTelRecipient: Dispatch<SetStateAction<number | undefined>>
+}
+
+const FormGetRecipient: FC<FormGetRecipientProps> = ({ setTelRecipient }) => {
+    const { isReguest, errors, handleSubmit, registers } = useFormGetRecipient({
+        setTelRecipient,
+    })
     return (
         <div className="bg-panel relative z-1 px-4 py-10 lg:px-10">
             <form className="flex items-end gap-4" onSubmit={handleSubmit}>
