@@ -6,6 +6,7 @@ import Input from '../../../ui/input'
 import Label from '../../../ui/label'
 import { RecipientFieldName } from './type'
 import useFormGetRecipient from './useFormGetRecipient'
+import Panel from '../../../ui/panel'
 
 export interface FormGetRecipientProps {
     setTelRecipient: Dispatch<SetStateAction<number | undefined>>
@@ -16,7 +17,7 @@ const FormGetRecipient: FC<FormGetRecipientProps> = ({ setTelRecipient }) => {
         setTelRecipient,
     })
     return (
-        <div className="bg-panel relative z-1 px-4 py-10 lg:px-10">
+        <Panel className="relative z-1">
             <form className="flex items-end gap-4" onSubmit={handleSubmit}>
                 <Label className="w-full">
                     <span>Номер телефона</span>
@@ -37,7 +38,7 @@ const FormGetRecipient: FC<FormGetRecipientProps> = ({ setTelRecipient }) => {
                     <ArrowMessange title="запросить чат" />
                 </BtnIcon>
             </form>
-        </div>
+        </Panel>
     )
 }
 

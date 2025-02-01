@@ -1,11 +1,12 @@
+import Panel from '../../ui/panel'
 import FormAuth from './form-auth'
 
 const Auth = () => {
     return (
-        <div className="bg-panel px-4 py-10 lg:px-10">
+        <Panel>
             <h1 className="mb-8 text-4xl">Авторизация</h1>
             <FormAuth />
-        </div>
+        </Panel>
     )
 }
 

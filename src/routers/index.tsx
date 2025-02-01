@@ -9,6 +9,7 @@ const Routers: FC = () => {
         <BrowserRouter>
             <Routes>
                 <Route element={<LayoutAuth />}>
+                    <Route path="/" element={<Auth />} />
                     <Route path="/auth" element={<Auth />} />
                     <Route path="/chat" element={<Chat />} />
                 </Route>
