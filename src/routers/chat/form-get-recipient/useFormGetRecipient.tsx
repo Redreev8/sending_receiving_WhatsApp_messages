@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { RecipientFieldName } from './context-get-recipient'
+import { RecipientFieldName } from './type'
 import { useContext, useState } from 'react'
 import checkWhatsapp from '../../../api/green-api/check-whatsapp'
 import { ContextAuth } from '../../auth/layout-auth'

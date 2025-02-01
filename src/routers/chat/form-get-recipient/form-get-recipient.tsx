@@ -4,7 +4,7 @@ import Error from '../../../ui/error'
 import ArrowMessange from '../../../ui/icon/arrow-messange'
 import Input from '../../../ui/input'
 import Label from '../../../ui/label'
-import { RecipientFieldName } from './context-get-recipient'
+import { RecipientFieldName } from './type'
 import useFormGetRecipient from './useFormGetRecipient'
 
 export interface FormGetRecipientProps {
@@ -33,7 +33,7 @@ const FormGetRecipient: FC<FormGetRecipientProps> = ({ setTelRecipient }) => {
                         </Error>
                     )}
                 </Label>
-                <BtnIcon>
+                <BtnIcon disabled={isReguest}>
                     <ArrowMessange title="запросить чат" />
                 </BtnIcon>
             </form>
