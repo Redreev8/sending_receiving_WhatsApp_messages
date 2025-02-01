@@ -23,8 +23,7 @@ const useSendMessage = ({ telRecipient, setMessage }: useSendMessageProps) => {
         formState: { errors },
     } = useForm<RecipientField>({
         defaultValues: {
-            [FieldsChat.message]:
-                'I use Green-API to send this message to you!',
+            [FieldsChat.message]: '',
         },
     })
     const [isReguest, setIsReguest] = useState<boolean>(false)
@@ -40,10 +39,6 @@ const useSendMessage = ({ telRecipient, setMessage }: useSendMessageProps) => {
     const getChat = async (fields: RecipientField) => {
         setIsReguest(true)
         try {
-            console.log({
-                chatId: telRecipient + '@c.us',
-                message: fields[FieldsChat.message],
-            })
             await sendMessage(
                 {
                     idInstance: settings[AuthFieldName.idInstance],

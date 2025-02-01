@@ -6,6 +6,7 @@ import BtnIcon from '../../../ui/btn-cion'
 import Error from '../../../ui/error'
 import ChatMessage from './chat-message'
 import useSendMessage from './useSendMessage'
+import useFindMessange from './useFindMessange'
 
 export interface ChatRecipientProps {
     telRecipient: number | undefined
@@ -21,14 +22,12 @@ export enum FieldsChat {
 }
 
 const ChatRecipient: FC<ChatRecipientProps> = ({ telRecipient }) => {
-    const [message, setMessage] = useState<message[]>(
-        Array.from({ length: 40 }, (_, i) => {
-            return {
-                message: `${i}`,
-                isMy: i % 2 === 0,
-            }
-        }),
-    )
+    const [message, setMessage] = useState<message[]>([])
+    const { isReguest, errors, handleSubmit, registers } = useSendMessage({
+        telRecipient,
+        setMessage,
+    })
+    useFindMessange({ telRecipient, setMessage })
     const cl = classNames(
         'bg-panel  shrink overflow-hidden transition-[height] duration-300',
         'flex flex-col gap-4 ',
@@ -37,10 +36,6 @@ const ChatRecipient: FC<ChatRecipientProps> = ({ telRecipient }) => {
             'h-0': !telRecipient,
         },
     )
-    const { isReguest, errors, handleSubmit, registers } = useSendMessage({
-        telRecipient,
-        setMessage,
-    })
     return (
         <div className={cl}>
             <div className="bg-gray flex h-full flex-col-reverse overflow-auto rounded-lg p-4">
