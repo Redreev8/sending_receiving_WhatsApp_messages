@@ -6,21 +6,22 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ className, isError, ...props }, ref) => {
+    ({ className, isError, disabled, ...props }, ref) => {
         const cl = classNames(
             className,
             'bg-gray py-2 px-3 rounded-lg',
             'placeholder:text-placeholder',
             'border focus:outline-none',
-            'transition-colors duration-300',
+            'transition-[background-color, opacity, caret-color] duration-300',
             {
                 'border-error hover:border-error focus:border-error caret-error':
                     isError,
                 'border-gray hover:border-green focus:border-green caret-green':
                     !isError,
+                'opacity-20': disabled,
             },
         )
-        return <input className={cl} ref={ref} {...props} />
+        return <input disabled={disabled} className={cl} ref={ref} {...props} />
     },
 )
 

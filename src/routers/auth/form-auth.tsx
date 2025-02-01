@@ -6,7 +6,7 @@ import useFormAuth, { AuthFieldName } from './useFormAuth'
 import Btn from '../../ui/btn'
 
 const FormAuth = () => {
-    const { registers, handleSubmit, errors } = useFormAuth()
+    const { registers, isReguest, handleSubmit, errors } = useFormAuth()
 
     return (
         <form
@@ -17,6 +17,7 @@ const FormAuth = () => {
                 <Label className="w-full lg:w-1/2">
                     <span>idInstance</span>
                     <Input
+                        disabled={isReguest}
                         placeholder="idInstance"
                         type="text"
                         isError={!!errors[AuthFieldName.idInstance]}
@@ -31,6 +32,7 @@ const FormAuth = () => {
                 <Label className="w-full lg:w-1/2">
                     <span>apiTokenInstance</span>
                     <Input
+                        disabled={isReguest}
                         placeholder="apiTokenInstance"
                         type="text"
                         isError={!!errors[AuthFieldName.token]}
@@ -45,6 +47,7 @@ const FormAuth = () => {
                 <Label className="w-full lg:w-1/2">
                     <span>Номер телефона</span>
                     <Input
+                        disabled={isReguest}
                         placeholder="79999999999"
                         type="tel"
                         isError={!!errors[AuthFieldName.tel]}
@@ -56,7 +59,7 @@ const FormAuth = () => {
                 </Label>
                 <div className="w-full lg:w-1/2" aria-hidden />
             </div>
-            <Btn type="submit" className="mt-4 lg:w-1/4">
+            <Btn type="submit" disabled={isReguest} className="mt-4 lg:w-1/4">
                 Войти
             </Btn>
         </form>

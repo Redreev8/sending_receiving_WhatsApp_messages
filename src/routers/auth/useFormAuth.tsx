@@ -1,4 +1,6 @@
 import { useForm } from 'react-hook-form'
+import getSettings from '../../api/green-api/get-settings'
+import { useState } from 'react'
 
 export enum AuthFieldName {
     idInstance = 'idInstance',
@@ -16,6 +18,7 @@ const useAuth = () => {
     const {
         register,
         handleSubmit,
+        setError,
         formState: { errors },
     } = useForm<AuthField>({
         defaultValues: {
@@ -24,6 +27,7 @@ const useAuth = () => {
             [AuthFieldName.tel]: '',
         },
     })
+    const [isReguest, setIsReguest] = useState<boolean>(false)
 
     const registers = {
         [AuthFieldName.idInstance]: () => {
@@ -47,9 +51,37 @@ const useAuth = () => {
             })
         },
     }
+
+    const Auth = async (fieldsValue: AuthField) => {
+        setIsReguest(true)
+        try {
+            const { data } = await getSettings({
+                idInstance: fieldsValue[AuthFieldName.idInstance],
+                apiTokenInstance: fieldsValue[AuthFieldName.token],
+            })
+            if (!data.wid.includes(fieldsValue[AuthFieldName.tel])) {
+                setError(AuthFieldName.tel, {
+                    message: 'неверный номер телефона',
+                })
+                setIsReguest(false)
+                return
+            }
+            setIsReguest(false)
+        } catch {
+            setError(AuthFieldName.idInstance, {
+                message: 'неверный idInstance',
+            })
+            setError(AuthFieldName.token, {
+                message: 'неверный token',
+            })
+            setIsReguest(false)
+        }
+    }
+
     return {
         registers,
-        handleSubmit: handleSubmit(() => {}),
+        isReguest,
+        handleSubmit: handleSubmit(Auth),
         errors,
     }
 }
