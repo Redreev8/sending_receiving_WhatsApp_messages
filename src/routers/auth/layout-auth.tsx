@@ -4,11 +4,13 @@ import Container from '../../ui/container'
 import { AuthField } from './useFormAuth'
 import { AuthFieldName } from './type-auth'
 
-export const ContextAuth = createContext<AuthField & { setSettings: (fields: AuthField) => void }>({
+export const ContextAuth = createContext<
+    AuthField & { setSettings: (fields: AuthField) => void }
+>({
     [AuthFieldName.token]: '',
     [AuthFieldName.idInstance]: '',
     [AuthFieldName.tel]: '',
-    setSettings: () => {}
+    setSettings: () => {},
 })
 
 const LayoutAuth = () => {
@@ -17,10 +19,13 @@ const LayoutAuth = () => {
         [AuthFieldName.token]: '',
         [AuthFieldName.tel]: '',
     })
-    let navigate = useNavigate();
+    const navigate = useNavigate()
     const changeSettings = (fields: AuthField) => {
         setSettings(() => fields)
-        localStorage.setItem(AuthFieldName.idInstance, fields[AuthFieldName.idInstance])
+        localStorage.setItem(
+            AuthFieldName.idInstance,
+            fields[AuthFieldName.idInstance],
+        )
         localStorage.setItem(AuthFieldName.token, fields[AuthFieldName.token])
         localStorage.setItem(AuthFieldName.tel, fields[AuthFieldName.tel])
     }
@@ -28,10 +33,13 @@ const LayoutAuth = () => {
         setSettings(() => {
             return {
                 ...{
-                    [AuthFieldName.idInstance]: localStorage.getItem(AuthFieldName.idInstance) ?? '',
-                    [AuthFieldName.token]: localStorage.getItem(AuthFieldName.idInstance) ?? '',
-                    [AuthFieldName.tel]: localStorage.getItem(AuthFieldName.idInstance) ?? '',
-                }
+                    [AuthFieldName.idInstance]:
+                        localStorage.getItem(AuthFieldName.idInstance) ?? '',
+                    [AuthFieldName.token]:
+                        localStorage.getItem(AuthFieldName.token) ?? '',
+                    [AuthFieldName.tel]:
+                        localStorage.getItem(AuthFieldName.tel) ?? '',
+                },
             }
         })
     }, [])
@@ -43,13 +51,15 @@ const LayoutAuth = () => {
             settings[AuthFieldName.tel]
         ) {
             navigate('/chat')
-            return 
+            return
         }
         navigate('/auth')
     }, [settings])
 
     return (
-        <ContextAuth.Provider value={{ ...settings, setSettings: changeSettings }}>
+        <ContextAuth.Provider
+            value={{ ...settings, setSettings: changeSettings }}
+        >
             <Container>
                 <Outlet />
             </Container>

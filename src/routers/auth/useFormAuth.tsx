@@ -3,6 +3,7 @@ import getSettings from '../../api/green-api/get-settings'
 import { useContext, useState } from 'react'
 import { ContextAuth } from './layout-auth'
 import { AuthFieldName } from './type-auth'
+import setSettingsInstas from '../../api/green-api/set-settings'
 
 export interface AuthField {
     [AuthFieldName.idInstance]: string
@@ -19,7 +20,8 @@ const useAuth = () => {
     } = useForm<AuthField>({
         defaultValues: {
             [AuthFieldName.idInstance]: '1103184203',
-            [AuthFieldName.token]: '98b71763112e4738b8c804e20107856c8f8a4536890847adbd',
+            [AuthFieldName.token]:
+                '98b71763112e4738b8c804e20107856c8f8a4536890847adbd',
             [AuthFieldName.tel]: '79827315994',
         },
     })
@@ -42,7 +44,7 @@ const useAuth = () => {
                 pattern: {
                     value: /^7\w{10}$/,
                     message:
-                        'номер телефона должен содержать 11 цифр (без пробелов)',
+                        'номер телефона должен содержать 11 цифр (без пробелов) по шаблону 7__________',
                 },
             })
         },
@@ -62,6 +64,10 @@ const useAuth = () => {
                 setIsReguest(false)
                 return
             }
+            await setSettingsInstas({
+                idInstance: fieldsValue[AuthFieldName.idInstance],
+                apiTokenInstance: fieldsValue[AuthFieldName.token],
+            })
             setSettings(fieldsValue)
             setIsReguest(false)
         } catch {
