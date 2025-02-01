@@ -23,7 +23,7 @@ const useFindMessange = ({ telRecipient, setMessage }: useFindMessange) => {
             const { data } = await receiveNotification(config)
             console.log(data)
             if (!data) {
-                setTimeout(getMesange, 5000)
+                setTimeout(getMesange, 500)
                 return
             }
             if (
@@ -31,7 +31,7 @@ const useFindMessange = ({ telRecipient, setMessage }: useFindMessange) => {
                 !data.body.senderData.chatId.includes(telRecipient) ||
                 !data.body.messageData.textMessageData
             ) {
-                setTimeout(getMesange, 5000)
+                setTimeout(getMesange, 500)
                 await deleteNotification(config, data.receiptId)
                 return
             }
@@ -43,7 +43,7 @@ const useFindMessange = ({ telRecipient, setMessage }: useFindMessange) => {
                 },
             ])
             await deleteNotification(config, data.receiptId)
-            setTimeout(getMesange, 5000)
+            setTimeout(getMesange, 500)
         } catch {
             setTimeout(getMesange, 60 * 60 * 1000)
         }
