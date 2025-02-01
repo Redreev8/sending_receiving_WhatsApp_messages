@@ -18,9 +18,9 @@ const useAuth = () => {
         formState: { errors },
     } = useForm<AuthField>({
         defaultValues: {
-            [AuthFieldName.idInstance]: '1103184203',
-            [AuthFieldName.token]: '98b71763112e4738b8c804e20107856c8f8a4536890847adbd',
-            [AuthFieldName.tel]: '79827315994',
+            [AuthFieldName.idInstance]: '',
+            [AuthFieldName.token]: '',
+            [AuthFieldName.tel]: '',
         },
     })
     const [isReguest, setIsReguest] = useState<boolean>(false)
